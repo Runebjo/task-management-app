@@ -1,6 +1,5 @@
-import { makeAutoObservable } from "mobx";
-import { Task } from "../types/task";
-
+import { makeAutoObservable } from 'mobx';
+import { Task } from '../types/task';
 
 class TaskStore {
     tasks: Task[] = [];
@@ -9,8 +8,13 @@ class TaskStore {
         makeAutoObservable(this);
     }
 
-    addTask(task: Task): void {
-        this.tasks.push(task);
+    addTask(title: string): void {
+        const newTask: Task = {
+            id: Date.now().toString(),
+            title,
+            completed: false
+        };
+        this.tasks.push(newTask);
     }
 
     removeTask(id: string): void {
@@ -23,4 +27,10 @@ class TaskStore {
             task.completed = !task.completed;
         }
     }
-} 
+
+    get completedTaskCount(): number {
+        return this.tasks.filter(task => task.completed).length;
+    }
+}
+
+export const taskStore = new TaskStore();
