@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { taskStore } from '../store/task-store';
 
 @customElement('task-form')
@@ -7,6 +7,7 @@ export class TaskForm extends LitElement {
     static properties = {
         taskTitle: { type: String }
     };
+    taskTitle: string;
 
     constructor() {
         super();
